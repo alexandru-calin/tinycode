@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -9,9 +8,7 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /{$}", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "Welcome to tinycode!")
-	})
+	mux.HandleFunc("GET /{$}", home)
 
 	log.Println("Starting the server on port 3000")
 	http.ListenAndServe(":3000", mux)

@@ -5,12 +5,11 @@ import (
 	"net/http"
 )
 
-func main() {
-	mux := http.NewServeMux()
+type application struct{}
 
-	mux.HandleFunc("GET /{$}", home)
-	mux.HandleFunc("GET /code/view/{id}", codeView)
+func main() {
+	app := &application{}
 
 	log.Println("Starting the server on port 3000")
-	http.ListenAndServe(":3000", mux)
+	http.ListenAndServe(":3000", app.routes())
 }

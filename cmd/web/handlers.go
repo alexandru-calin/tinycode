@@ -1,22 +1,43 @@
 package main
 
 import (
-	"fmt"
+	"html/template"
 	"net/http"
 	"strconv"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Welcome to tinycode!")
+func (app *application) home(w http.ResponseWriter, r *http.Request) {
+	tpl, err := template.ParseFiles("./ui/html/pages/home.html")
+	if err != nil {
+		app.logger.Error(err.Error())
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	err = tpl.Execute(w, nil)
+	if err != nil {
+		app.logger.Error(err.Error())
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+	}
 }
 
-func codeView(w http.ResponseWriter, r *http.Request) {
+func (app *application) codeView(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(r.PathValue("id"))
 	if err != nil {
 		http.Error(w, "Malformed ID", http.StatusBadRequest)
 		return
 	}
 
-	message := fmt.Sprintf("Viewing code snippet with ID %d", id)
-	fmt.Fprintln(w, message)
+	tpl, err := template.ParseFiles("./ui/html/pages/view.html")
+	if err != nil {
+		app.logger.Error(err.Error())
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	err = tpl.Execute(w, id)
+	if err != nil {
+		app.logger.Error(err.Error())
+		http.Error(w, "Internal server error", http.StatusInternalServerError)
+	}
 }

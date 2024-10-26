@@ -1,15 +1,29 @@
 package main
 
 import (
-	"log"
+	"flag"
+	"log/slog"
 	"net/http"
+	"os"
 )
 
-type application struct{}
+type application struct {
+	logger *slog.Logger
+}
 
 func main() {
-	app := &application{}
+	addr := flag.String("addr", ":3000", "HTTP network address")
+	flag.Parse()
 
-	log.Println("Starting the server on port 3000")
-	http.ListenAndServe(":3000", app.routes())
+	app := &application{
+		logger: slog.New(slog.NewTextHandler(os.Stdout, nil)),
+	}
+
+	app.logger.Info("Starting the server", "addr", *addr)
+
+	err := http.ListenAndServe(*addr, app.routes())
+	if err != nil {
+		app.logger.Error(err.Error())
+		os.Exit(1)
+	}
 }

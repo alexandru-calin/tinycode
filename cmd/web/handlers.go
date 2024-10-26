@@ -1,24 +1,13 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
 	"strconv"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	tpl, err := template.ParseFiles("./ui/html/pages/home.html")
-	if err != nil {
-		app.logger.Error(err.Error())
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-		return
-	}
-
-	err = tpl.Execute(w, nil)
-	if err != nil {
-		app.logger.Error(err.Error())
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-	}
+	files := []string{"./ui/html/base.html", "./ui/html/pages/home.html"}
+	app.render(w, r, files, nil)
 }
 
 func (app *application) codeView(w http.ResponseWriter, r *http.Request) {
@@ -28,16 +17,6 @@ func (app *application) codeView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tpl, err := template.ParseFiles("./ui/html/pages/view.html")
-	if err != nil {
-		app.logger.Error(err.Error())
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-		return
-	}
-
-	err = tpl.Execute(w, id)
-	if err != nil {
-		app.logger.Error(err.Error())
-		http.Error(w, "Internal server error", http.StatusInternalServerError)
-	}
+	files := []string{"./ui/html/base.html", "./ui/html/pages/view.html"}
+	app.render(w, r, files, id)
 }

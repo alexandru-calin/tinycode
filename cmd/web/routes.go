@@ -8,5 +8,5 @@ func (app *application) routes() http.Handler {
 	mux.HandleFunc("GET /{$}", home)
 	mux.HandleFunc("GET /code/view/{id}", codeView)
 
-	return app.logRequest(mux)
+	return app.logRequest(setCommonHeaders(mux))
 }

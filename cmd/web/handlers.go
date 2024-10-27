@@ -6,8 +6,7 @@ import (
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	files := []string{"./ui/html/base.html", "./ui/html/pages/home.html"}
-	app.render(w, r, files, nil)
+	app.render(w, "home.html", nil)
 }
 
 func (app *application) codeView(w http.ResponseWriter, r *http.Request) {
@@ -17,6 +16,5 @@ func (app *application) codeView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{"./ui/html/base.html", "./ui/html/pages/view.html"}
-	app.render(w, r, files, id)
+	app.render(w, "view.html", id)
 }

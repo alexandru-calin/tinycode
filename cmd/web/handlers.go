@@ -6,7 +6,7 @@ import (
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	app.render(w, "home.html", nil)
+	app.render(w, r, "home.html", nil)
 }
 
 func (app *application) codeView(w http.ResponseWriter, r *http.Request) {
@@ -16,5 +16,5 @@ func (app *application) codeView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	app.render(w, "view.html", id)
+	app.render(w, r, "view.html", id)
 }

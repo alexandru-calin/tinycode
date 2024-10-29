@@ -1,11 +1,14 @@
 package main
 
 import (
+	"database/sql"
 	"flag"
 	"html/template"
 	"log/slog"
 	"net/http"
 	"os"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type application struct {
@@ -15,9 +18,25 @@ type application struct {
 
 func main() {
 	addr := flag.String("addr", ":3000", "HTTP network address")
+	dsn := flag.String("dsn", "web:password@/tinycode?parseTime=true", "MySQL data source name")
 	flag.Parse()
 
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
+
+	db, err := sql.Open("mysql", *dsn)
+	if err != nil {
+		logger.Error(err.Error())
+		os.Exit(1)
+	}
+
+	err = db.Ping()
+	if err != nil {
+		db.Close()
+		logger.Error(err.Error())
+		os.Exit(1)
+	}
+
+	defer db.Close()
 
 	templateCache, err := newTemplateCache()
 	if err != nil {

@@ -29,5 +29,5 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	app.render(w, r, "view.html", snippet.ID)
+	app.render(w, r, "view.html", snippet)
 }

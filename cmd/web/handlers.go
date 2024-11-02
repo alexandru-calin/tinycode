@@ -9,7 +9,13 @@ import (
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
-	app.render(w, r, "home.html", nil)
+	snippets, err := app.snippets.Latest()
+	if err != nil {
+		app.serverError(w, r, err)
+		return
+	}
+
+	app.render(w, r, "home.html", snippets)
 }
 
 func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {

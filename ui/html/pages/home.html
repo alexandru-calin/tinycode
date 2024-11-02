@@ -12,7 +12,7 @@
         {{range .}}
         <tr>
             <td><a href="/snippet/view/{{.ID}}" class="text-decoration-none">{{.Title}}</a></td>
-            <td>{{.Created}}</td>
+            <td>{{humanReadableDate .Created}}</td>
         </tr>
         {{end}}
     </tbody>

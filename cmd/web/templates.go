@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"path/filepath"
+	"time"
 )
 
 func newTemplateCache() (map[string]*template.Template, error) {
@@ -17,7 +18,7 @@ func newTemplateCache() (map[string]*template.Template, error) {
 		name := filepath.Base(page)
 		files := []string{"./ui/html/base.html", page}
 
-		tpl, err := template.ParseFiles(files...)
+		tpl, err := template.New(name).Funcs(functions).ParseFiles(files...)
 		if err != nil {
 			return nil, err
 		}
@@ -26,4 +27,12 @@ func newTemplateCache() (map[string]*template.Template, error) {
 	}
 
 	return cache, nil
+}
+
+var functions = template.FuncMap{
+	"humanReadableDate": humanReadableDate,
+}
+
+func humanReadableDate(t time.Time) string {
+	return t.Format("02 January 2006 at 15:04")
 }

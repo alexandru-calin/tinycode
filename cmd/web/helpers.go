@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func (app *application) render(w http.ResponseWriter, r *http.Request, page string, data any) {
+func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string, data any) {
 	tpl, ok := app.templateCache[page]
 	if !ok {
 		err := fmt.Errorf("the template %s does not exist", page)
@@ -21,6 +21,8 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, page stri
 		app.serverError(w, r, err)
 		return
 	}
+
+	w.WriteHeader(status)
 
 	buf.WriteTo(w)
 }

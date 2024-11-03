@@ -7,25 +7,61 @@ create a new snippet
 <form action="/snippet/create" method="post">
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" name="title" id="title" class="form-control">
+        <input 
+            type="text" 
+            name="title" 
+            id="title" 
+            value="{{.Title}}" 
+            class="form-control {{if .FieldErrors.title}}is-invalid{{end}}"
+        >
+        {{with .FieldErrors.title}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
     </div>
     <div class="mb-3">
         <label for="content" class="form-label">Content</label>
-        <textarea name="content" id="content" rows="5" class="form-control font-monospace"></textarea>
+        <textarea 
+            name="content" 
+            id="content" 
+            rows="5" 
+            class="form-control font-monospace {{if .FieldErrors.content}}is-invalid{{end}}"
+        >{{.Content}}</textarea>
+        <div class="invalid-feedback">{{.FieldErrors.content}}</div>
     </div>
     <div class="mb-4">
-        <span class="me-4">Delete in</span>
+        <p class="form-label">Delete in</p>
         <div class="form-check form-check-inline">
             <label for="one-year" class="form-check-label">1 Year</label>
-            <input type="radio" name="expires" id="one-year" value="365" checked class="form-check-input">
+            <input 
+                type="radio" 
+                name="expires" 
+                id="one-year" 
+                value="365"
+                {{if (eq .Expires 365)}}checked{{end}}
+                class="form-check-input"
+            >
         </div>
         <div class="form-check form-check-inline">
             <label for="one-week" class="form-check-label">1 Week</label>
-            <input type="radio" name="expires" id="one-week" value="7" class="form-check-input">
+            <input 
+                type="radio" 
+                name="expires" 
+                id="one-week" 
+                value="7" 
+                {{if (eq .Expires 7)}}checked{{end}} 
+                class="form-check-input"
+            >
         </div>
         <div class="form-check form-check-inline">
             <label for="one-day" class="form-check-label">1 Day</label>
-            <input type="radio" name="expires" id="one-day" value="1" class="form-check-input">
+            <input 
+                type="radio" 
+                name="expires" 
+                id="one-day" 
+                value="1" 
+                {{if (eq .Expires 1)}}checked{{end}} 
+                class="form-check-input"
+            >
         </div>
     </div>
     <button type="submit" class="btn btn-lg btn-dark">Publish snippet</button>

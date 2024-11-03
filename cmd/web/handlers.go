@@ -37,3 +37,7 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 
 	app.render(w, r, "view.html", snippet)
 }
+
+func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request) {
+	app.render(w, r, "create.html", nil)
+}

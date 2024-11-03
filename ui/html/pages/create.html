@@ -1,0 +1,33 @@
+{{define "title"}}
+create a new snippet
+{{end}}
+
+{{define "main"}}
+<h2 class="fw-bold mb-4">Create a new snippet</h2>
+<form action="/snippet/create" method="post">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="title" id="title" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">Content</label>
+        <textarea name="content" id="content" rows="5" class="form-control font-monospace"></textarea>
+    </div>
+    <div class="mb-4">
+        <span class="me-4">Delete in</span>
+        <div class="form-check form-check-inline">
+            <label for="one-year" class="form-check-label">1 Year</label>
+            <input type="radio" name="expires" id="one-year" value="365" checked class="form-check-input">
+        </div>
+        <div class="form-check form-check-inline">
+            <label for="one-week" class="form-check-label">1 Week</label>
+            <input type="radio" name="expires" id="one-week" value="7" class="form-check-input">
+        </div>
+        <div class="form-check form-check-inline">
+            <label for="one-day" class="form-check-label">1 Day</label>
+            <input type="radio" name="expires" id="one-day" value="1" class="form-check-input">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-lg btn-dark">Publish snippet</button>
+</form>
+{{end}}

@@ -4,7 +4,7 @@ home
 
 {{define "main"}}
 <h2 class="fw-bold mb-4">Latest snippets</h2>
-{{if .}}
+{{if .Snippets}}
 <table class="table table-hover">
     <thead>
         <tr>
@@ -13,7 +13,7 @@ home
         </tr>
     </thead>
     <tbody>
-        {{range .}}
+        {{range .Snippets}}
         <tr>
             <td><a href="/snippet/view/{{.ID}}" class="text-decoration-none">{{.Title}}</a></td>
             <td>{{humanReadableDate .Created}}</td>

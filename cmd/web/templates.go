@@ -4,7 +4,16 @@ import (
 	"html/template"
 	"path/filepath"
 	"time"
+
+	"github.com/alexandru-calin/tinycode/internal/models"
 )
+
+type templateData struct {
+	Snippet  models.Snippet
+	Snippets []models.Snippet
+	Form     any
+	Toast    string
+}
 
 func newTemplateCache() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}

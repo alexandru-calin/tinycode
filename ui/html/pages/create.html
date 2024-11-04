@@ -11,10 +11,10 @@ create a new snippet
             type="text" 
             name="title" 
             id="title" 
-            value="{{.Title}}" 
-            class="form-control {{if .FieldErrors.title}}is-invalid{{end}}"
+            value="{{.Form.Title}}" 
+            class="form-control {{if .Form.FieldErrors.title}}is-invalid{{end}}"
         >
-        {{with .FieldErrors.title}}
+        {{with .Form.FieldErrors.title}}
         <div class="invalid-feedback">{{.}}</div>
         {{end}}
     </div>
@@ -24,9 +24,11 @@ create a new snippet
             name="content" 
             id="content" 
             rows="5" 
-            class="form-control font-monospace {{if .FieldErrors.content}}is-invalid{{end}}"
-        >{{.Content}}</textarea>
-        <div class="invalid-feedback">{{.FieldErrors.content}}</div>
+            class="form-control font-monospace {{if .Form.FieldErrors.content}}is-invalid{{end}}"
+        >{{.Form.Content}}</textarea>
+        {{with .Form.FieldErrors.content}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
     </div>
     <div class="mb-4">
         <p class="form-label">Delete in</p>
@@ -37,7 +39,7 @@ create a new snippet
                 name="expires" 
                 id="one-year" 
                 value="365"
-                {{if (eq .Expires 365)}}checked{{end}}
+                {{if (eq .Form.Expires 365)}}checked{{end}}
                 class="form-check-input"
             >
         </div>
@@ -48,7 +50,7 @@ create a new snippet
                 name="expires" 
                 id="one-week" 
                 value="7" 
-                {{if (eq .Expires 7)}}checked{{end}} 
+                {{if (eq .Form.Expires 7)}}checked{{end}} 
                 class="form-check-input"
             >
         </div>
@@ -59,7 +61,7 @@ create a new snippet
                 name="expires" 
                 id="one-day" 
                 value="1" 
-                {{if (eq .Expires 1)}}checked{{end}} 
+                {{if (eq .Form.Expires 1)}}checked{{end}} 
                 class="form-check-input"
             >
         </div>

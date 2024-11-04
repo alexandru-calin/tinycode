@@ -19,6 +19,9 @@
                 </div>
             </div>
         </nav>
+        {{with .Toast}}
+        <div>{{.}}</div>
+        {{end}}
         <div class="container mt-4">
             {{template "main" .}}
         </div>

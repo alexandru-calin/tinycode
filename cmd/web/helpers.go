@@ -9,7 +9,7 @@ import (
 	"github.com/go-playground/form/v4"
 )
 
-func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string, data any) {
+func (app *application) render(w http.ResponseWriter, r *http.Request, status int, page string, data templateData) {
 	tpl, ok := app.templateCache[page]
 	if !ok {
 		err := fmt.Errorf("the template %s does not exist", page)
@@ -57,4 +57,10 @@ func (app *application) decodePostForm(r *http.Request, dest any) error {
 	}
 
 	return nil
+}
+
+func (app *application) newTemplateData(r *http.Request) templateData {
+	return templateData{
+		Toast: app.sessionManager.PopString(r.Context(), "toast"),
+	}
 }

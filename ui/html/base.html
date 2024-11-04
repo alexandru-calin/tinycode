@@ -20,7 +20,16 @@
             </div>
         </nav>
         {{with .Toast}}
-        <div>{{.}}</div>
+        <div class="position-relative mt-2" aria-live="polite" aria-atomic="true">
+            <div class="toast-container top-0 start-50 translate-middle-x">
+                <div class="text-bg-primary toast show">
+                    <div class="d-flex">
+                        <div class="toast-body">{{.}}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
         {{end}}
         <div class="container mt-4">
             {{template "main" .}}

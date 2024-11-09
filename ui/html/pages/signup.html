@@ -1,0 +1,48 @@
+{{define "title"}}
+Sign Up
+{{end}}
+
+{{define "main"}}
+<h2 class="fw-bold mb-4">Join tinycode today</h2>
+<form action="/user/signup" method="post" novalidate>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input 
+            type="text" 
+            name="name" 
+            id="name" 
+            value="{{.Form.Name}}" 
+            class="form-control {{if .Form.FieldErrors.name}}is-invalid{{end}}"
+        >
+        {{with .Form.FieldErrors.name}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input 
+            type="email" 
+            name="email" 
+            id="email" 
+            value="{{.Form.Email}}" 
+            class="form-control {{if .Form.FieldErrors.email}}is-invalid{{end}}"
+        >
+        {{with .Form.FieldErrors.email}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+    <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input 
+            type="password" 
+            name="password" 
+            id="password"
+            class="form-control {{if .Form.FieldErrors.password}}is-invalid{{end}}"
+        >
+        {{with .Form.FieldErrors.password}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+    <button type="submit" class="btn btn-lg btn-dark">Sign Up</button>
+</form>
+{{end}}

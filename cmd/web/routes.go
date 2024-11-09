@@ -9,6 +9,8 @@ func (app *application) routes() http.Handler {
 	mux.HandleFunc("GET /snippet/view/{id}", app.snippetView)
 	mux.HandleFunc("GET /snippet/create", app.snippetCreate)
 	mux.HandleFunc("POST /snippet/create", app.snippetCreatePost)
+	mux.HandleFunc("GET /user/signup", app.userSignUp)
+	mux.HandleFunc("POST /user/signup", app.userSignUpPost)
 
 	return app.logRequest(setCommonHeaders(app.sessionManager.LoadAndSave(mux)))
 }

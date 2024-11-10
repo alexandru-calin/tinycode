@@ -1,0 +1,40 @@
+{{define "title"}}
+Log In
+{{end}}
+
+{{define "main"}}
+<h2 class="fw-bold mb-4">Log in to tinycode</h2>
+<form action="/user/login" method="post" novalidate>
+    {{range .Form.NonFieldErrors}}
+        <div>{{.}}</div>
+    {{end}}
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input 
+            type="email" 
+            name="email" 
+            id="email"
+            value="{{.Form.Email}}"
+            class="form-control {{if .Form.FieldErrors.email}}is-invalid{{end}}"
+        >
+        {{with .Form.FieldErrors.email}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+
+    <div class="mb-4">
+        <label for="password" class="form-label">Password</label>
+        <input 
+            type="password"
+            name="password"
+            id="password"
+            class="form-control {{if .Form.FieldErrors.password}}is-invalid{{end}}"
+        >
+        {{with .Form.FieldErrors.password}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+    <button type="submit" class="btn btn-lg btn-dark">Log In</button>
+</form>
+{{end}}

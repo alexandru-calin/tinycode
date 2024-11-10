@@ -208,3 +208,16 @@ func (app *application) userLogInPost(w http.ResponseWriter, r *http.Request) {
 
 	http.Redirect(w, r, "/snippet/create", http.StatusSeeOther)
 }
+
+func (app *application) userLogoutPost(w http.ResponseWriter, r *http.Request) {
+	err := app.sessionManager.RenewToken(r.Context())
+	if err != nil {
+		app.serverError(w, r, err)
+		return
+	}
+
+	app.sessionManager.Remove(r.Context(), "authenticatedUserID")
+	app.sessionManager.Put(r.Context(), "toast", "You've been logged out successfully!")
+
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}

@@ -9,10 +9,11 @@ import (
 )
 
 type templateData struct {
-	Snippet  models.Snippet
-	Snippets []models.Snippet
-	Form     any
-	Toast    string
+	Snippet         models.Snippet
+	Snippets        []models.Snippet
+	Form            any
+	Toast           string
+	IsAuthenticated bool
 }
 
 func newTemplateCache() (map[string]*template.Template, error) {

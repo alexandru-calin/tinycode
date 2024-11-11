@@ -6,9 +6,8 @@ Log In
 <h2 class="fw-bold mb-4">Log in to tinycode</h2>
 <form action="/user/login" method="post" novalidate>
     {{range .Form.NonFieldErrors}}
-        <div>{{.}}</div>
+        <div class="alert alert-danger">{{.}}</div>
     {{end}}
-
     <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input 

@@ -15,5 +15,5 @@ func (app *application) routes() http.Handler {
 	mux.HandleFunc("POST /user/login", app.userLogInPost)
 	mux.Handle("POST /user/logout", app.requireAuthentication(http.HandlerFunc(app.userLogoutPost)))
 
-	return app.logRequest(setCommonHeaders(app.sessionManager.LoadAndSave(mux)))
+	return app.logRequest(setCommonHeaders(app.sessionManager.LoadAndSave(app.authenticate(mux))))
 }

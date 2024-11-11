@@ -6,6 +6,7 @@ func (app *application) routes() http.Handler {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /{$}", app.home)
+	mux.HandleFunc("GET /about", app.about)
 	mux.HandleFunc("GET /snippet/view/{id}", app.snippetView)
 	mux.Handle("GET /snippet/create", app.requireAuthentication(http.HandlerFunc(app.snippetCreate)))
 	mux.Handle("POST /snippet/create", app.requireAuthentication(http.HandlerFunc(app.snippetCreatePost)))

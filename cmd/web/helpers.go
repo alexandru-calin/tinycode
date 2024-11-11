@@ -63,6 +63,7 @@ func (app *application) newTemplateData(r *http.Request) templateData {
 	return templateData{
 		Toast:           app.sessionManager.PopString(r.Context(), "toast"),
 		IsAuthenticated: app.isAuthenticated(r),
+		Location:        r.URL.Path,
 	}
 }
 

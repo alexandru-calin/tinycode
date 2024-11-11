@@ -2,10 +2,12 @@ package main
 
 import (
 	"html/template"
+	"io/fs"
 	"path/filepath"
 	"time"
 
 	"github.com/alexandru-calin/tinycode/internal/models"
+	"github.com/alexandru-calin/tinycode/ui"
 )
 
 type templateData struct {
@@ -19,16 +21,16 @@ type templateData struct {
 func newTemplateCache() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
 
-	pages, err := filepath.Glob("./ui/html/pages/*.html")
+	pages, err := fs.Glob(ui.Files, "html/pages/*.html")
 	if err != nil {
 		return nil, err
 	}
 
 	for _, page := range pages {
 		name := filepath.Base(page)
-		files := []string{"./ui/html/base.html", page}
+		patterns := []string{"html/base.html", page}
 
-		tpl, err := template.New(name).Funcs(functions).ParseFiles(files...)
+		tpl, err := template.New(name).Funcs(functions).ParseFS(ui.Files, patterns...)
 		if err != nil {
 			return nil, err
 		}

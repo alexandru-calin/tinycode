@@ -17,6 +17,7 @@ type templateData struct {
 	Toast           string
 	IsAuthenticated bool
 	Location        string
+	User            models.User
 }
 
 func newTemplateCache() (map[string]*template.Template, error) {

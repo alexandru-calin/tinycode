@@ -1,0 +1,53 @@
+{{define "title"}}
+my account
+{{end}}
+
+{{define "main"}}
+<h2 class="fw-bold mb-4">My account</h2>
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-3">
+            <h6 class="mb-0">
+                <i class="bi bi-person"></i>
+                Name
+            </h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+            {{.User.Name}}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">
+            <h6 class="mb-0">
+                <i class="bi bi-envelope-at"></i>
+                Email
+            </h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+            {{.User.Email}}
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">
+            <h6 class="mb-0">
+                <i class="bi bi-calendar"></i>
+                Joined
+            </h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+            {{humanReadableDate .User.Created}}
+            </div>
+        </div>
+        <hr>
+        <form action='/user/logout' method='POST'>
+            <button class="btn btn-danger">
+                <i class="bi bi-box-arrow-left"></i>
+                Logout
+            </button>
+        </form>
+    </div>
+</div>
+{{end}}

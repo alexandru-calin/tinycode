@@ -16,7 +16,7 @@ type templateData struct {
 	Form            any
 	Toast           string
 	IsAuthenticated bool
-	Location        string
+	Path            string
 	User            models.User
 }
 

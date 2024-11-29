@@ -14,21 +14,23 @@ This is a web application written in Go that allows users to sign up, write, and
 
 ## Requirements
 
-- **Go**: [Download Go](https://go.dev/dl)
-- **MySQL**: [Download MySQL](https://dev.mysql.com/doc/refman/8.0/en/installing.html)
+- **Go**
+- **MySQL**
 - **Make**: A build tool (pre-installed on most Linux/macOS systems, can be installed via package managers)
+- **migrate**: A command-line tool to perform migrations on the database. The easiest method is to download a [pre-built binary](https://github.com/golang-migrate/migrate/releases) and move
+it to a location on your system path
 
 ## Getting Started
 
 ### 1. Clone the Repository
-```sh
+```
 git clone https://github.com/alexandru-calin/tinycode
 cd tinycode
 ```
 
 ### 2. Run the setup script
 It sets up the database and generates a .envrc file.
-```sh
+```
 chmod +x setup.sh
 ./setup.sh
 ```
@@ -44,5 +46,5 @@ make run/web
 ```
 After starting the application, open your browser and navigate to
 http://localhost:3000
-
+<br>
 You should see the home page of the web application. From here, users can sign up, log in, and interact with the platform.

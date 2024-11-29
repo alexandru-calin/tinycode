@@ -29,7 +29,7 @@ type application struct {
 
 func main() {
 	addr := flag.String("addr", ":3000", "HTTP network address")
-	dsn := flag.String("dsn", "web:password@/tinycode?parseTime=true", "MySQL data source name")
+	dsn := flag.String("db-dsn", "", "MySQL data source name")
 	debug := flag.Bool("debug", false, "Enable debug mode")
 	flag.Parse()
 
@@ -47,6 +47,8 @@ func main() {
 		logger.Error(err.Error())
 		os.Exit(1)
 	}
+
+	logger.Info("Established Database connection pool")
 
 	defer db.Close()
 
@@ -90,6 +92,11 @@ func main() {
 	logger.Info("Starting the server", "addr", *addr)
 
 	err = srv.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
+	if err != nil {
+		logger.Error(err.Error())
+	}
+
+	err = srv.ListenAndServe()
 	if err != nil {
 		logger.Error(err.Error())
 		os.Exit(1)
